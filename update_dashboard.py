@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from collections import Counter
 
 NOTION_TOKEN  = os.environ.get("NOTION_TOKEN", "")
-DATABASE_ID   = "46f75f41-5ec2-82e2-a337-075d9bf92c64"
+DATABASE_ID   = "fc475f415ec2828298e4013a334aa66b"  # LEARNING Articles database
 SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), ".snapshot.json")
 OUTPUT_HTML   = os.path.join(os.path.dirname(__file__), "index.html")
 
