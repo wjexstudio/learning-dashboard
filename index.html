@@ -1,265 +1,538 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LEARNING Dashboard</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning | Content Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0f1117;--s:#1a1d27;--s2:#222635;--br:#2e3248;--a:#7c6aff;--a2:#ff6a9b;--a3:#6adfb8;--a4:#ffc96a;--t:#e8eaf6;--tm:#7b82a8;--r:13px}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--t);font-family:'Segoe UI','Noto Sans Thai',sans-serif;font-size:14px;line-height:1.6}
-.topbar{background:#16192a;border-bottom:1px solid var(--br);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-.topbar h1{font-size:1.1rem;font-weight:700}.topbar h1 em{color:var(--a);font-style:normal}
-.upd{font-size:.73rem;color:var(--tm)}
-.main{max-width:1280px;margin:0 auto;padding:20px 16px 50px}
-.kg{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
-.kc{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:16px 14px;position:relative;overflow:hidden}
-.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,var(--a))}
-.kl{font-size:.68rem;color:var(--tm);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.kv{font-size:1.8rem;font-weight:800;color:var(--ac,var(--a))}.ks{font-size:.68rem;color:var(--tm);margin-top:2px}
-.st{font-size:.78rem;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.1em;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
-.st::after{content:'';flex:1;height:1px;background:var(--br)}
-.g3{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px;margin-bottom:16px}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.cd{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px}
-.cd h3{font-size:.73rem;color:var(--tm);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.cw{position:relative;height:210px}
-.at{width:100%;border-collapse:collapse;font-size:.78rem}
-.at th{text-align:left;padding:8px 10px;color:var(--tm);font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--br);background:var(--s2)}
-.at td{padding:8px 10px;border-bottom:1px solid #1e2133;vertical-align:middle}
-.at tr:hover td{background:var(--s2)}.at tr:last-child td{border-bottom:none}
-.tc2{max-width:240px}
-.b{display:inline-block;padding:1px 7px;border-radius:99px;font-size:.67rem;font-weight:600;white-space:nowrap}
-.bp{background:rgba(106,223,184,.15);color:#6adfb8}.bd{background:rgba(255,201,106,.15);color:#ffc96a}
-.bt{background:rgba(124,106,255,.15);color:#7c6aff}.bb{background:rgba(255,201,106,.15);color:#ffc96a}
-.bw{background:rgba(255,106,155,.15);color:#ff6a9b}.bds{background:rgba(106,223,184,.12);color:#6adfb8}
-.bn{background:rgba(123,130,168,.1);color:#7b82a8}.bai{background:rgba(176,160,255,.12);color:#b0a0ff}
-.pr{margin-bottom:9px}.pl{display:flex;justify-content:space-between;font-size:.76rem;margin-bottom:3px}
-.pl span:last-child{color:var(--tm)}.pb{height:6px;background:var(--s2);border-radius:99px;overflow:hidden}
-.pf{height:100%;border-radius:99px}
-.tl{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
-.tp{background:var(--s2);border:1px solid var(--br);border-radius:99px;padding:1px 9px;font-size:.71rem;color:var(--tm);display:flex;align-items:center;gap:4px}
-.tc{background:var(--a);color:#fff;border-radius:99px;padding:0 5px;font-size:.63rem;font-weight:700}
-.tz{background:var(--s);color:var(--tm);border:1px solid var(--br);border-radius:99px;padding:0 5px;font-size:.63rem}
-.sc{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.sb{font-size:3rem;font-weight:900;line-height:1;margin:14px 0}
-.sv{max-height:460px;overflow-y:auto}
-.sv::-webkit-scrollbar{width:4px}.sv::-webkit-scrollbar-thumb{background:var(--br);border-radius:99px}
-@media(max-width:900px){.kg{grid-template-columns:repeat(3,1fr)}.g2,.g3{grid-template-columns:1fr}}
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --accent: #6366f1;
+    --accent2: #22d3ee;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --orange: #f97316;
+  }
+  * { 
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
+  }
+  body { 
+    background: var(--bg); 
+    color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; 
+  }
+  header { 
+    background: var(--card); 
+    border-bottom: 1px solid var(--border); 
+    padding: 20px 32px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+  }
+  header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+  header h1 span { color: var(--accent); }
+  .updated { font-size: 0.78rem; color: var(--muted); }
+  .container { max-width: 1280px; margin: 0 auto; padding: 28px 32px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .kpi .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .kpi .value { font-size: 2rem; font-weight: 700; line-height: 1; }
+  .kpi .sub { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+  .kpi.accent .value { color: var(--accent2); }
+  .kpi.green .value { color: var(--green); }
+  .kpi.yellow .value { color: var(--yellow); }
+  .kpi.red .value { color: var(--red); }
+  .kpi.purple .value { color: var(--accent); }
+  .charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .chart-card h3 { font-size: 0.85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 220px; }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; }
+  .section h2 { font-size: 1rem; font-weight: 600; margin-bottom: 18px; color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead th { text-align: left; padding: 10px 12px; background: rgba(255,255,255,0.04); color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody td { padding: 10px 12px; vertical-align: middle; }
+  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; }
+  .badge.published { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge.draft { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge.archive { background: rgba(100,100,120,0.2); color: var(--muted); }
+  .badge.cat { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+  .badge.tag { background: rgba(34,211,238,0.1); color: var(--accent2); margin-right: 3px; }
+  .pill { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 0.68rem; background: rgba(99,102,241,0.2); color: #c7d2fe; margin: 2px; }
+  .miss { color: var(--red); font-size: 0.75rem; }
+  .ok { color: var(--green); font-size: 0.75rem; }
+  .score-bar { display: flex; align-items: center; gap: 8px; }
+  .score-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; }
+  .hashtags-section { display: flex; flex-wrap: wrap; gap: 6px; }
+  footer { text-align: center; padding: 24px; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 8px; }
+  @media (max-width: 900px) {
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
+    .charts-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .charts-row { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+  }
 </style>
 </head>
 <body>
-<div class="topbar">
-  <h1>📚 <em>LEARNING</em> — Content Dashboard</h1>
-  <div class="upd">อัปเดตอัตโนมัติ · 17/03/2026 13:12 UTC</div>
-</div>
-<div class="main">
 
-<div class="kg">
-  <div class="kc" style="--ac:#7c6aff"><div class="kl">บทความทั้งหมด</div><div class="kv">18</div><div class="ks">Blog posts</div></div>
-  <div class="kc" style="--ac:#6adfb8"><div class="kl">Published</div><div class="kv">2</div><div class="ks">11% ของทั้งหมด</div></div>
-  <div class="kc" style="--ac:#ffc96a"><div class="kl">Draft</div><div class="kv">16</div><div class="ks">ยังไม่เผยแพร่</div></div>
-  <div class="kc" style="--ac:#ff6a9b"><div class="kl">ขาด Metadata</div><div class="kv">32</div><div class="ks">รายการที่ต้องแก้</div></div>
-  <div class="kc" style="--ac:#ff6a9b"><div class="kl">Content Score</div><div class="kv">38</div><div class="ks">/ 100 คะแนนรวม</div></div>
-</div>
+<header>
+  <h1>&#x1F4DA; <span>LEARNING</span> Dashboard</h1>
+  <span class="updated">Updated: 18/03/2026 03:09 UTC</span>
+</header>
 
-<div class="st">📊 ภาพรวม</div>
-<div class="g3">
-  <div class="cd"><h3>Categories</h3><div class="cw"><canvas id="catC"></canvas></div></div>
-  <div class="cd"><h3>สถานะบทความ</h3><div class="cw"><canvas id="statusC"></canvas></div></div>
-  <div class="cd"><h3>Tags ที่ใช้บ่อย</h3><div class="pr"><div class="pl"><span>Claude</span><span>5</span></div><div class="pb"><div class="pf" style="width:100%;background:#7c6aff"></div></div></div><div class="pr"><div class="pl"><span>Learning</span><span>4</span></div><div class="pb"><div class="pf" style="width:80%;background:#7c6aff"></div></div></div><div class="pr"><div class="pl"><span>Business</span><span>3</span></div><div class="pb"><div class="pf" style="width:60%;background:#7c6aff"></div></div></div><div class="pr"><div class="pl"><span>Coding</span><span>2</span></div><div class="pb"><div class="pf" style="width:40%;background:#7c6aff"></div></div></div><div class="pr"><div class="pl"><span>AI</span><span>2</span></div><div class="pb"><div class="pf" style="width:40%;background:#7c6aff"></div></div></div><div class="pr"><div class="pl"><span>Marketing</span><span>2</span></div><div class="pb"><div class="pf" style="width:40%;background:#7c6aff"></div></div></div></div>
-</div>
+<div class="container">
 
-<div class="g2">
-  <div class="cd"><h3>Timeline การสร้างบทความ</h3><div class="cw"><canvas id="timeC"></canvas></div></div>
-  <div class="cd">
-    <h3>Hashtags</h3>
-    <div style="font-size:.68rem;color:#6adfb8;margin-bottom:5px;font-weight:700">✅ ใช้งานแล้ว</div>
-    <div class="tl" style="margin-bottom:10px"><div class="tp">#WJEXS <span class="tc">2</span></div><div class="tp">#AgentSkills <span class="tc">2</span></div><div class="tp">#ClaudeCowork <span class="tc">3</span></div><div class="tp">#Manifest <span class="tc">1</span></div><div class="tp">#Writing <span class="tc">1</span></div><div class="tp">#Gemini <span class="tc">1</span></div><div class="tp">#Line <span class="tc">1</span></div><div class="tp">#N8N <span class="tc">1</span></div><div class="tp">#NewFeature <span class="tc">2</span></div><div class="tp">#Automation <span class="tc">2</span></div><div class="tp">#GoogleAIStudio <span class="tc">1</span></div><div class="tp">#NanoBanana2 <span class="tc">1</span></div><div class="tp">#OnePersonBusiness <span class="tc">2</span></div><div class="tp">#Bookreview <span class="tc">1</span></div><div class="tp">#Study <span class="tc">2</span></div><div class="tp">#Solopreneur <span class="tc">4</span></div><div class="tp">#DigitalProduct <span class="tc">1</span></div><div class="tp">#PersonalBranding <span class="tc">1</span></div><div class="tp">#ClaudeCode <span class="tc">2</span></div><div class="tp">#CLI <span class="tc">1</span></div><div class="tp">#Agent <span class="tc">1</span></div><div class="tp">#Productivity <span class="tc">2</span></div></div>
-    <div style="font-size:.68rem;color:#ff6a9b;margin-bottom:5px;font-weight:700">⚠️ ยังไม่มีบทความ</div>
-    <div class="tl"></div>
-  </div>
-</div>
-
-<div class="st">📝 รายการบทความทั้งหมด (18 บทความ)</div>
-<div class="st">📝 รายการบทความทั้งหมด (18 บทความ)</div>
-<div class="cd" style="padding:0;overflow:hidden">
-  <div class="sv">
-  <table class="at">
-    <thead><tr><th>#</th><th>ชื่อบทความ</th><th>Status</th><th>Category</th><th>Tags</th><th>Published</th><th>Slug</th><th>Metadata</th></tr></thead>
-    <tbody><tr>
-      <td style="color:#7b82a8">1</td>
-      <td class="tc2"><strong>ทำไมผมถึงเลิกใช้ WordPress และหันมาใช้ Notion เป็น CMS</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Learning</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">wordpress-to-notion-…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Cat, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">2</td>
-      <td class="tc2"><strong>คู่มือและคำแนะนำการใช้งาน Skills</strong></td>
-      <td><span class="b bp">Published</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Learning</span> <span class="b bai" style="font-size:.68rem">Claude</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">2025-07-15</td>
-      <td style="font-size:.76rem;color:#7b82a8">claude-cowork-skills…</td>
-      <td><span style="color:#6adfb8;font-size:.73rem">✅</span></td></tr><tr>
-      <td style="color:#7b82a8">3</td>
-      <td class="tc2"><strong>Second Brain</strong></td>
-      <td><span class="b bp">Published</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Learning</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">2025-05-01</td>
-      <td style="font-size:.76rem;color:#7b82a8">build-a-second-brain</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Cat</span></td></tr><tr>
-      <td style="color:#7b82a8">4</td>
-      <td class="tc2"><strong>เริ่มต้นใช้ Claude Code สำหรับ Developer</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Claude</span> <span class="b bai" style="font-size:.68rem">Coding</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8"><span style="color:#ff6a9b">ไม่มี!</span></td>
-      <td><span style="color:#ff6a9b;font-size:.73rem">⚠️ Slug, Desc, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">5</td>
-      <td class="tc2"><strong>N8N Automation สำหรับ Solopreneur</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bb">Business</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Automation</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">n8n-automation-solop…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">6</td>
-      <td class="tc2"><strong>Google AI Studio vs Claude: เปรียบเทียบ AI Tools</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">AI</span> <span class="b bai" style="font-size:.68rem">Gemini</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">google-ai-studio-vs-…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Desc, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">7</td>
-      <td class="tc2"><strong>สร้าง Personal Brand บน Social Media</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bb">Business</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Marketing</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">personal-brand-socia…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">8</td>
-      <td class="tc2"><strong>Line OA สำหรับธุรกิจออนไลน์</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bb">Business</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Marketing</span> <span class="b bai" style="font-size:.68rem">Line</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">line-oa-business</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">9</td>
-      <td class="tc2"><strong>Digital Product คืออะไร และวิธีเริ่มต้นทำ</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bb">Business</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Business</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">digital-product-guid…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">10</td>
-      <td class="tc2"><strong>Productivity System ที่ผมใช้จริง</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Productivity</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">my-productivity-syst…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Cat, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">11</td>
-      <td class="tc2"><strong>Claude Agent SDK: สร้าง AI Agent ของตัวเอง</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">AI</span> <span class="b bai" style="font-size:.68rem">Claude</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">claude-agent-sdk-gui…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">12</td>
-      <td class="tc2"><strong>รีวิวหนังสือ Atomic Habits</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Learning</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8"><span style="color:#ff6a9b">ไม่มี!</span></td>
-      <td><span style="color:#ff6a9b;font-size:.73rem">⚠️ Slug, Desc, Cat, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">13</td>
-      <td class="tc2"><strong>สร้าง Manifest สำหรับ Cowork Plugin</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Claude</span> <span class="b bai" style="font-size:.68rem">Coding</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">cowork-plugin-manife…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">14</td>
-      <td class="tc2"><strong>NanoBanana 2: อัปเดตใหม่ที่ต้องรู้</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Tools</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">nanobanana2-update</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Desc, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">15</td>
-      <td class="tc2"><strong>Writing System ที่ช่วยให้เขียนได้ทุกวัน</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Writing</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8"><span style="color:#ff6a9b">ไม่มี!</span></td>
-      <td><span style="color:#ff6a9b;font-size:.73rem">⚠️ Slug, Desc, Cat, Date</span></td></tr><tr>
-      <td style="color:#7b82a8">16</td>
-      <td class="tc2"><strong>One Person Business Model</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bb">Business</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Business</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">one-person-business-…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">17</td>
-      <td class="tc2"><strong>Claude Cowork: คู่มือสำหรับผู้เริ่มต้น</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bt">Technology</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Claude</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8">claude-cowork-beginn…</td>
-      <td><span style="color:#ffc96a;font-size:.73rem">⚠️ Date</span></td></tr><tr>
-      <td style="color:#7b82a8">18</td>
-      <td class="tc2"><strong>WJEXS Framework: วิธีคิดแบบ Solopreneur</strong></td>
-      <td><span class="b bd">Draft</span></td>
-      <td><span class="b bn">—</span></td>
-      <td><span class="b bai" style="font-size:.68rem">Business</span> <span class="b bai" style="font-size:.68rem">Productivity</span></td>
-      <td style="font-size:.76rem;color:#7b82a8">—</td>
-      <td style="font-size:.76rem;color:#7b82a8"><span style="color:#ff6a9b">ไม่มี!</span></td>
-      <td><span style="color:#ff6a9b;font-size:.73rem">⚠️ Slug, Desc, Cat, Date</span></td></tr></tbody>
-  </table>
-  </div>
-</div>
-
-<div class="st">📋 Metadata Health</div>
-<div class="g2">
-  <div class="cd"><h3>ความครบถ้วน Metadata</h3><div class="cw"><canvas id="metaC"></canvas></div></div>
-  <div class="cd sc">
-    <h3>Overall Content Score</h3>
-    <div class="sb" style="color:#ff6a9b">38</div>
-    <div style="font-size:.78rem;color:#7b82a8">Publish Rate (11%) × 40% + Metadata (56%) × 60%</div>
-    <div style="margin-top:12px;font-size:.75rem;color:#7b82a8;line-height:2">
-      📅 ขาด Published Date: <strong style="color:#ffc96a">16</strong> บทความ<br>
-      🔗 ขาด Slug: <strong style="color:#ff6a9b">4</strong> บทความ<br>
-      📁 ขาด Category: <strong style="color:#ff6a9b">6</strong> บทความ<br>
-      📝 ขาด Description: <strong style="color:#ffc96a">6</strong> บทความ
+  <!-- KPI Cards -->
+  <div class="kpi-row">
+    <div class="kpi accent">
+      <div class="label">Total Articles</div>
+      <div class="value">18</div>
+      <div class="sub">Blog type only</div>
+    </div>
+    <div class="kpi green">
+      <div class="label">Published</div>
+      <div class="value">2</div>
+      <div class="sub">11% publish rate</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="label">Draft</div>
+      <div class="value">16</div>
+      <div class="sub">89% in progress</div>
+    </div>
+    <div class="kpi red">
+      <div class="label">Missing Meta</div>
+      <div class="value">9</div>
+      <div class="sub">slug / category / date</div>
+    </div>
+    <div class="kpi purple">
+      <div class="label">Health Score</div>
+      <div class="value">58%</div>
+      <div class="sub">publish x0.4 + meta x0.6</div>
     </div>
   </div>
-</div>
+
+  <!-- Charts -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Status Breakdown</h3>
+      <div class="chart-wrap">
+        <canvas id="chartStatus"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Articles by Category</h3>
+      <div class="chart-wrap">
+        <canvas id="chartCategory"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Articles by Month (Created)</h3>
+      <div class="chart-wrap">
+        <canvas id="chartTimeline"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Articles Table -->
+  <div class="section">
+    <h2>All Blog Articles (18)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Category</th>
+          <th>Tags</th>
+          <th>Slug</th>
+          <th>Pub Date</th>
+          <th>Created</th>
+          <th>Meta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Writing 101</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Learning</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">writing-one-o-one</td>
+          <td>2026-02-20</td>
+          <td>2026-02-16</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Writing 102</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Self-Development</span> <span class="badge tag">Learning</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">learning-writing-102</td>
+          <td>2026-02-25</td>
+          <td>2026-02-24</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>&#x0E17;&#x0E33;&#x0E44;&#x0E21;&#x0E1C;&#x0E21;&#x0E16;&#x0E36;&#x0E07;&#x0E40;&#x0E25;&#x0E34;&#x0E01;&#x0E43;&#x0E0A;&#x0E49; WordPress</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Learning</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">wordpress-to-notion-cms</td>
+          <td>2026-03-17</td>
+          <td>2026-02-21</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Second Brain</td>
+          <td><span class="badge published">Published</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Learning</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">build-a-second-brain</td>
+          <td>2026-03-17</td>
+          <td>2026-02-16</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>&#x0E19;&#x0E34;&#x0E17;&#x0E32;&#x0E19;&#x0E40;&#x0E23;&#x0E37;&#x0E48;&#x0E2D;&#x0E07;&#x0E41;&#x0E23;&#x0E01;</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Work Life</span></td>
+          <td><span class="badge tag">Self-Development</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">my-first-story</td>
+          <td>2026-03-17</td>
+          <td>2026-03-08</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>&#x0E04;&#x0E39;&#x0E48;&#x0E21;&#x0E37;&#x0E2D;&#x0E41;&#x0E25;&#x0E30;&#x0E04;&#x0E33;&#x0E41;&#x0E19;&#x0E30;&#x0E19;&#x0E33;&#x0E01;&#x0E32;&#x0E23;&#x0E43;&#x0E0A;&#x0E49;&#x0E07;&#x0E32;&#x0E19; Skills</td>
+          <td><span class="badge published">Published</span></td>
+          <td><span class="badge cat">Technology</span></td>
+          <td><span class="badge tag">AI</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">ai-agent-writing-skills-docs</td>
+          <td>2026-03-02</td>
+          <td>2026-03-02</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>The Power of Output</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Work Life</span></td>
+          <td><span class="badge tag">Learning</span> <span class="badge tag">Self-Development</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">the-power-of-output</td>
+          <td>2026-02-10</td>
+          <td>2026-02-16</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>&#x0E41;&#x0E19;&#x0E27;&#x0E17;&#x0E32;&#x0E07;&#x0E41;&#x0E01;&#x0E49;&#x0E1B;&#x0E31;&#x0E0D;&#x0E2B;&#x0E32; CSS</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Website</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">how-to-edit-tailwind-css-after-agent-work</td>
+          <td>2026-03-17</td>
+          <td>2026-02-19</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>&#x0E43;&#x0E0A;&#x0E49;&#x0E1F;&#x0E35;&#x0E40;&#x0E08;&#x0E2D;&#x0E23;&#x0E4C;&#x0E43;&#x0E2B;&#x0E21;&#x0E48;! Gemini 3</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Technology</span></td>
+          <td><span class="badge tag">AI</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">gemini3-n8n-line-workflow</td>
+          <td>2026-03-10</td>
+          <td>2026-03-08</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>&#x0E04;&#x0E27;&#x0E32;&#x0E21;&#x0E1E;&#x0E2D;&#x0E43;&#x0E08;&#x0E43;&#x0E19;&#x0E0A;&#x0E35;&#x0E27;&#x0E34;&#x0E15;</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Work Life</span></td>
+          <td><span class="badge tag">Self-Development</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">life-satisfaction</td>
+          <td>2026-03-17</td>
+          <td>2026-03-06</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>&#x0E40;&#x0E23;&#x0E34;&#x0E48;&#x0E21;&#x0E15;&#x0E49;&#x0E19;&#x0E43;&#x0E0A;&#x0E49;&#x0E07;&#x0E32;&#x0E19; Claude Code</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Technology</span></td>
+          <td><span class="badge tag">AI</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">claude-code-experience</td>
+          <td>2026-03-17</td>
+          <td>2026-03-15</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>QA-Agent &#x0E1C;&#x0E39;&#x0E49;&#x0E04;&#x0E27;&#x0E1A;&#x0E04;&#x0E38;&#x0E21;&#x0E21;&#x0E32;&#x0E15;&#x0E23;&#x0E10;&#x0E32;&#x0E19;&#x0E40;&#x0E27;&#x0E47;&#x0E1A;&#x0E44;&#x0E0B;&#x0E15;&#x0E4C;</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Website</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">how-to-custom-qa-agent</td>
+          <td>2026-03-17</td>
+          <td>2026-02-21</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>&#x0E1B;&#x0E31;&#x0E0D;&#x0E2B;&#x0E32;&#x0E43;&#x0E19;&#x0E01;&#x0E32;&#x0E23;&#x0E43;&#x0E0A;&#x0E49;&#x0E07;&#x0E32;&#x0E19; Notion CMS</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Technology</span></td>
+          <td><span class="badge tag">Website</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">problems-using-notion-cms-with-nextjs</td>
+          <td>2026-03-17</td>
+          <td>2026-03-08</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>&#x0E41;&#x0E08;&#x0E01; Prompt &#x0E2A;&#x0E33;&#x0E2B;&#x0E23;&#x0E31;&#x0E1A;&#x0E17;&#x0E33;&#x0E23;&#x0E39;&#x0E1B;&#x0E42;&#x0E1B;&#x0E23;&#x0E44;&#x0E1F;&#x0E25;&#x0E4C;&#x0E2A;&#x0E27;&#x0E22;&#x0E46;</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Design</span></td>
+          <td><span class="badge tag">Design Solutions</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">free-prompt-for-profile-photo</td>
+          <td>2026-03-17</td>
+          <td>2026-03-06</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>AI Agent Skills</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">Website</span> <span class="badge tag">AI</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">ai-agent-skills</td>
+          <td>2026-02-23</td>
+          <td>2026-02-16</td>
+          <td><span class="miss">No cat</span></td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>&#x0E27;&#x0E34;&#x0E18;&#x0E35;&#x0E2A;&#x0E23;&#x0E49;&#x0E32;&#x0E07;&#x0E17;&#x0E31;&#x0E01;&#x0E29;&#x0E30;&#x0E02;&#x0E2D;&#x0E07; Agent &#x0E2A;&#x0E33;&#x0E2B;&#x0E23;&#x0E31;&#x0E1A; Gemini CLI</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="badge tag">AI</span></td>
+          <td><span class="miss">No slug</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td>2026-02-24</td>
+          <td><span class="miss">No slug/date</span></td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>One Person Business &#x0E04;&#x0E37;&#x0E2D;&#x0E2D;&#x0E30;&#x0E44;&#x0E23;?</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Business</span></td>
+          <td><span class="badge tag">Business Solutions</span></td>
+          <td style="font-size:0.72rem;color:#a5b4fc">what-is-one-person-business</td>
+          <td>2026-03-17</td>
+          <td>2026-03-12</td>
+          <td><span class="ok">&#x2713;</span></td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>&#x0E41;&#x0E04;&#x0E48;&#x0E27;&#x0E32;&#x0E07;&#x0E25;&#x0E34;&#x0E49;&#x0E07;&#x0E04;&#x0E4C;&#x0E27;&#x0E34;&#x0E14;&#x0E35;&#x0E42;&#x0E2D;&#x0E17;&#x0E35;&#x0E48;&#x0E0A;&#x0E2D;&#x0E1A;</td>
+          <td><span class="badge draft">Draft</span></td>
+          <td><span class="badge cat">Technology</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td><span class="miss">No slug</span></td>
+          <td><span class="miss">&#x2014;</span></td>
+          <td>2026-03-06</td>
+          <td><span class="miss">No slug/desc/date</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Meta Health & Hashtags Row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px">
+    <div class="section" style="margin-bottom:0">
+      <h2>Metadata Health</h2>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Present</th><th>Missing</th><th>Coverage</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Slug</td>
+            <td style="color:var(--green)">16</td>
+            <td style="color:var(--red)">2</td>
+            <td>
+              <div class="score-bar">
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:88.9%;background:var(--green)"></div></div>
+                <span style="font-size:0.75rem;color:var(--muted)">89%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td style="color:var(--green)">17</td>
+            <td style="color:var(--red)">1</td>
+            <td>
+              <div class="score-bar">
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:94.4%;background:var(--green)"></div></div>
+                <span style="font-size:0.75rem;color:var(--muted)">94%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td style="color:var(--green)">11</td>
+            <td style="color:var(--red)">7</td>
+            <td>
+              <div class="score-bar">
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:61.1%;background:var(--yellow)"></div></div>
+                <span style="font-size:0.75rem;color:var(--muted)">61%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Pub Date</td>
+            <td style="color:var(--green)">16</td>
+            <td style="color:var(--red)">2</td>
+            <td>
+              <div class="score-bar">
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:88.9%;background:var(--green)"></div></div>
+                <span style="font-size:0.75rem;color:var(--muted)">89%</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section" style="margin-bottom:0">
+      <h2>Hashtags</h2>
+      <div class="hashtags-section">
+        <span class="pill">#Writing</span>
+        <span class="pill">#Study</span>
+        <span class="pill">#Bookreview</span>
+        <span class="pill">#Gemini</span>
+        <span class="pill">#Line</span>
+        <span class="pill">#N8N</span>
+        <span class="pill">#NewFeature</span>
+        <span class="pill">#Automation</span>
+        <span class="pill">#ClaudeCode</span>
+        <span class="pill">#CLI</span>
+        <span class="pill">#Agent</span>
+        <span class="pill">#Productivity</span>
+        <span class="pill">#WJEXS</span>
+        <span class="pill">#GoogleAIStudio</span>
+        <span class="pill">#NanoBanana2</span>
+        <span class="pill">#OnePersonBusiness</span>
+        <span class="pill">#Solopreneur</span>
+        <span class="pill">#DigitalProduct</span>
+        <span class="pill">#PersonalBranding</span>
+        <span class="pill">#Manifest</span>
+      </div>
+    </div>
+  </div>
 
 </div>
+
+<footer>
+  LEARNING Dashboard &mdash; Auto-generated by Claude Agent &mdash; 18/03/2026 03:09 UTC
+</footer>
+
 <script>
-const G={grid:'rgba(255,255,255,.06)',tick:'#7b82a8',leg:'#e8eaf6'};
-Chart.defaults.color=G.tick; Chart.defaults.borderColor=G.grid;
-new Chart(document.getElementById('catC'),{type:'bar',data:{labels:["\u0e44\u0e21\u0e48\u0e23\u0e30\u0e1a\u0e38", "Technology", "Business"],datasets:[{label:'บทความ',data:[6, 7, 5],backgroundColor:['rgba(124,106,255,.75)','rgba(255,201,106,.75)','rgba(255,106,155,.7)','rgba(106,223,184,.7)','rgba(123,130,168,.5)'],borderRadius:6,borderWidth:0}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:G.grid},ticks:{color:G.tick,stepSize:1}},y:{grid:{display:false},ticks:{color:G.tick,font:{size:10}}}}  }});
-new Chart(document.getElementById('statusC'),{type:'doughnut',data:{labels:['Published (2)','Draft (16)'],datasets:[{data:[2,16],backgroundColor:['rgba(106,223,184,.85)','rgba(255,201,106,.8)'],borderColor:['#1a1d27'],borderWidth:3,hoverOffset:6}]},options:{cutout:'68%',plugins:{legend:{position:'bottom',labels:{color:G.leg,padding:10,font:{size:11}}}}  }});
-new Chart(document.getElementById('timeC'),{type:'bar',data:{labels:["2025-04", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02"],datasets:[{label:'บทความ',data:[1, 1, 1, 2, 2, 2, 3, 2, 2, 2],backgroundColor:'rgba(124,106,255,.7)',borderRadius:5,borderWidth:0}]},options:{plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:G.tick}},y:{grid:{color:G.grid},ticks:{color:G.tick,stepSize:1}}}  }});
-new Chart(document.getElementById('metaC'),{type:'bar',data:{labels:['มี Slug','มี Description','มี Category','มี Published Date'],datasets:[{label:'มีข้อมูล',data:[14, 12, 12, 2],backgroundColor:'rgba(124,106,255,.7)',borderRadius:5,borderWidth:0},{label:'ขาด',data:[4, 6, 6, 16],backgroundColor:'rgba(255,106,155,.55)',borderRadius:5,borderWidth:0}]},options:{indexAxis:'y',plugins:{legend:{position:'bottom',labels:{color:G.leg,padding:8}}},scales:{x:{stacked:true,max:18,grid:{color:G.grid},ticks:{color:G.tick,stepSize:1}},y:{stacked:true,grid:{display:false},ticks:{color:G.tick,font:{size:10}}}}  }});
+const C = {
+  indigo: 'rgba(99,102,241,0.85)',
+  cyan: 'rgba(34,211,238,0.85)',
+  green: 'rgba(34,197,94,0.85)',
+  yellow: 'rgba(234,179,8,0.85)',
+  orange: 'rgba(249,115,22,0.85)',
+  pink: 'rgba(236,72,153,0.85)',
+  faded: 'rgba(99,102,120,0.45)'
+};
+Chart.defaults.color = '#8892a4';
+Chart.defaults.borderColor = '#2a2d3a';
+
+// Status Doughnut
+new Chart(document.getElementById('chartStatus'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Draft (16)', 'Published (2)'],
+    datasets: [{
+      data: [16, 2],
+      backgroundColor: [C.yellow, C.green],
+      borderWidth: 2,
+      borderColor: '#1a1d27'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { padding: 14, font: { size: 11 } } } },
+    cutout: '65%'
+  }
+});
+
+// Category Bar
+new Chart(document.getElementById('chartCategory'), {
+  type: 'bar',
+  data: {
+    labels: ['Technology', 'Work Life', 'Business', 'Design', '(none)'],
+    datasets: [{
+      label: 'Articles',
+      data: [5, 3, 1, 1, 8],
+      backgroundColor: [C.indigo, C.cyan, C.orange, C.pink, C.faded],
+      borderRadius: 6, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { stepSize: 1 }, beginAtZero: true }
+    }
+  }
+});
+
+// Timeline (by created month)
+new Chart(document.getElementById('chartTimeline'), {
+  type: 'bar',
+  data: {
+    labels: ['Feb 2026', 'Mar 2026'],
+    datasets: [{
+      label: 'Articles Created',
+      data: [8, 10],
+      backgroundColor: C.indigo,
+      borderRadius: 6, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { stepSize: 2 }, beginAtZero: true }
+    }
+  }
+});
 </script>
+
 </body>
 </html>
