@@ -7,7 +7,7 @@
 3. เลือก **Public**
 4. **อย่า** tick "Add README" — ปล่อยว่างไว้
 5. คลิก **Create repository**
-6. Copy URL repo เช่น `https://github.com/YOURNAME/learning-dashboard`
+6. Copy URL repo เช่น `https://github.com/wjexstudio/learning-dashboard`
 
 ---
 
